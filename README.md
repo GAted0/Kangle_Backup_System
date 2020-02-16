@@ -7,5 +7,3 @@
 ![](https://ae01.alicdn.com/kf/U592befbbe7064bfdacf659f089e0cde3v.png)
 
 ![](https://ae01.alicdn.com/kf/U1746f4a19ba24f388c682146ddb8ec790.png)
-
-Blog: [噜啦](https://lula.fun)
