@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>登陆</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="{% static 'adminlte-2.4.10/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'adminlte-2.4.10/bower_components/font-awesome/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'adminlte-2.4.10/bower_components/Ionicons/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'adminlte-2.4.10/dist/css/AdminLTE.min.css' %}">
+  <link rel="stylesheet" href="{% static 'adminlte-2.4.10/dist/css/skins/skin-blue.min.css' %}">
+</head>
+
+<body class="hold-transition login-page" style="">
+<div class="login-box">
+  <div class="login-logo">
+    <b>iMoe </b>BackupSystem
+  </div>
+    {% if login_form.captcha.errors %}
+        <div class="callout callout-info">
+          <h4>提示：</h4>
+
+          <p>{{ login_form.captcha.errors }}</p>
+        </div>
+    {% elif message %}
+        <div class="callout callout-info">
+          <h4>提示：</h4>
+
+          <p>{{ message }}</p>
+        </div>
+    {% endif %}
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">登陆 萌云 Kangle 备份系统</p>
+
+
+    <form action="" method="post">
+     {% csrf_token %}
+{#    {{ login_form }}#}
+      <div class="form-group has-feedback">
+        {{ login_form.username}}
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+
+      <div class="form-group has-feedback">
+        {{ login_form.password}}
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+        <div class="form-group has-feedback">
+        {{ login_form.captcha}}
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">点击登陆</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+</div>
+
+  </div>
+
+</div>
+
+
+<script src="{% static 'adminlte-2.4.10/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'adminlte-2.4.10/bower_components/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'adminlte-2.4.10/plugins/iCheck/icheck.min.js' %}"></script>
+</body>

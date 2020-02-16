@@ -1,0 +1,122 @@
+{% extends 'front/base.html' %}
+{% load static %}
+{% block title %}备份下载{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block breadcrumb %}
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        备份下载
+        <small>提供5天数据备份下载服务</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{% url 'user:index' %}"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li class="active">备份下载</li>
+      </ol>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-check"></i> 请注意</h4>
+            文件压缩格式为7z，请去掉后缀001后解压
+    </div>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">源码备份</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th style="width: 50px">ID</th>
+                        <th style="text-align: center">备份时间</th>
+                        <th style="text-align: center">文件大小</th>
+                        <th style="width: 50px; text-align: center" >下载</th>
+                    </tr>
+
+                    {% for web_backup in web_backups %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="text-align: center">{{ web_backup.time }}</td>
+                            <td style="text-align: center">{{ web_backup.size }}</td>
+                        {% ifequal web_backup.size  '文件不存在' %}
+                            <td>
+                                <form>
+                                   <button type="submit" class="badge bg-red">下载</button>
+                                </form>
+                           </td>
+                            {% else %}
+                            <td>
+                                <form action="" method="post">
+                                    <input name="username" value="{{ request.session.user_username }}" hidden>
+                                    <input name="download_path" value="{{ web_backup.download_path }}" hidden>
+                                   <button type="submit" class="badge bg-green">下载</button>
+                                </form>
+                           </td>
+                        {% endifequal %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">数据库备份</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th style="width: 15px">ID</th>
+                        <th style="text-align: center">备份时间</th>
+                        <th style="text-align: center">文件大小</th>
+                        <th style="width: 50px; text-align: center">下载</th>
+                    </tr>
+
+                    {% for sql_backup in sql_backups %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td style="text-align: center">{{ sql_backup.time }}</td>
+                            <td style="text-align: center">{{ sql_backup.size }}</td>
+                        {% ifequal sql_backup.size  '文件不存在' %}
+                            <td>
+                                <form>
+                                   <button type="submit" class="badge bg-red">下载</button>
+                                </form>
+                           </td>
+                            {% else %}
+                            <td>
+                                <form action="" method="post">
+                                    <input name="username" value="{{ request.session.user_username }}" hidden>
+                                    <input name="download_path" value="{{ sql_backup.download_path }}" hidden>
+                                   <button type="submit" class="badge bg-green">下载</button>
+                                </form>
+                           </td>
+                        {% endifequal %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}
